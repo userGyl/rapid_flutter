@@ -5,6 +5,8 @@
 1.Get Packages
 2.Flutter run
 
+tip:flutter_module/local.properties 文件中的路径需要更改为本地的android和flutter sdk
+
 ## 图像资源文件夹assets
 ## 开发目录lib:
 1. /animation  ##动画demo
