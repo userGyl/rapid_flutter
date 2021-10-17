@@ -21,8 +21,8 @@ class RequestInterceptor extends Interceptor {
     //   options.headers['content-type'] = 'multipart/form-data';//FormData这种情况改content-type
     // }
 
-    // // 加载动画----这个就是请求页面时的那个loading窗 --处理逻辑 我是用options?.data['showLoading']或options?.queryParameters['showLoading'],
-    //就是我们在传参的时候多加一个参数，这个因为前人就这样做的，也跟后端约定的，后端见showLoading不做处理。这样不是很好，反正options是有其他字段加的
+    // 请求页面时的那个loading窗 --处理逻辑 options?.data['showLoading']或options?.queryParameters['showLoading'],
+    //可以在传参的时候多加一个参数
     // if (options?.data?.runtimeType == FormData) {
     //   Alert.showLoading();
     // } else if ((options?.data != null &&

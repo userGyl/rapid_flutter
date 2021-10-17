@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-/// 自定义异常
+/// http异常处理类
 class AppException implements Exception {
   final String? _message;
   final int? _code;
