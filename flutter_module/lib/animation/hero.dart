@@ -15,10 +15,7 @@ class hero extends StatelessWidget {
           onTap: () => Navigator.pop(context),
         ),
       ),
-      body: HeroWidget(
-        photoUrl:
-            'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3363295869,2467511306&fm=26&gp=0.jpg',
-      ),
+      body: HeroWidget('https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3363295869,2467511306&fm=26&gp=0.jpg'),
     );
   }
 }
@@ -26,7 +23,7 @@ class hero extends StatelessWidget {
 class HeroWidget extends StatelessWidget {
   final String photoUrl;
 
-  const HeroWidget({Key key, this.photoUrl}) : super(key: key);
+  HeroWidget(this.photoUrl , {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

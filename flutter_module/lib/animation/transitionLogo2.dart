@@ -9,28 +9,12 @@ class transitionLogo2 extends StatefulWidget {
   _transitionLogo2State createState() => _transitionLogo2State();
 }
 
-class _animationLogo extends AnimatedWidget {
-  _animationLogo({Key key, Animation<double> animation})
-      : super(key: key, listenable: animation);
 
-  @override
-  Widget build(BuildContext context) {
-    final Animation<double> animation = listenable;
-    return Center(
-      child: Container(
-        margin: EdgeInsets.symmetric(vertical: 10),
-        height: animation.value,
-        width: animation.value,
-        child: FlutterLogo(),
-      ),
-    );
-  }
-}
 
 class _transitionLogo2State extends State<transitionLogo2>
     with SingleTickerProviderStateMixin {
-  Animation<double> animation;
-  AnimationController controller;
+  late Animation<double> animation;
+  late AnimationController controller;
 
   @override
   void initState() {
@@ -39,9 +23,9 @@ class _transitionLogo2State extends State<transitionLogo2>
     //vsync 页面不可见动画资源的回收
     controller =
         AnimationController(vsync: this, duration: Duration(seconds: 2));
-    animation = Tween<double>(begin: 0, end: 300).animate(controller);
+    animation = Tween<double>(begin: 0, end: 300).animate(controller!);
     //AnimatedWidget 拥有重绘监听 不需要setState
-    controller.forward();
+    controller!.forward();
   }
 
   @override
@@ -55,7 +39,7 @@ class _transitionLogo2State extends State<transitionLogo2>
         ),
       ),
       body: _animationLogo(
-        animation: animation,
+        listenable: animation,
       ),
     );
   }
@@ -63,7 +47,27 @@ class _transitionLogo2State extends State<transitionLogo2>
   @override
   void dispose() {
     // TODO: implement dispose
-    controller.dispose();
+    controller!.dispose();
     super.dispose();
+  }
+}
+
+class _animationLogo extends AnimatedWidget {
+
+  Animation<double> listenable;
+  _animationLogo({Key? key, required  this.listenable})
+      : super(key: key, listenable: listenable);
+
+  @override
+  Widget build(BuildContext context) {
+    Animation<double> animation = listenable;
+    return Center(
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 10),
+        height: animation.value,
+        width: animation.value,
+        child: FlutterLogo(),
+      ),
+    );
   }
 }

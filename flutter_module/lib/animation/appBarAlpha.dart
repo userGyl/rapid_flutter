@@ -1,8 +1,7 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:http/http.dart' as http;
 
 const APPBAR_SCROLL_OFFSET = 100;
 
@@ -24,15 +23,23 @@ class _AppBarAlpha extends State<AppBarAlpha> {
   double appBarAlpha = 0;
   String showResult = '';
 
-  //实现异步
-  Future<CommonModel> fetchPost() async {
+  //http实现异步
+  /*Future<CommonModel> fetchPost() async {
     final response = await http
         .get('http://www.devio.org/io/flutter_app/json/test_common_model.json');
     //utf-8乱码
     Utf8Decoder utf8decoder = Utf8Decoder();
     final result = json.decode(utf8decoder.convert(response.bodyBytes));
     return CommonModel.fromJson(result);
+  }*/
+  Future<CommonModel> fetchPost() async {
+    var dio = Dio();
+    final response = await dio.get('http://www.devio.org/io/flutter_app/json/test_common_model.json');
+    Utf8Decoder utf8decoder = Utf8Decoder();
+    final result = json.decode(utf8decoder.convert(response.data));
+    return CommonModel.fromJson(result);
   }
+
 
   _onScroll(offset) {
     double alpha = offset / APPBAR_SCROLL_OFFSET;
@@ -84,7 +91,12 @@ class _AppBarAlpha extends State<AppBarAlpha> {
           children: <Widget>[
             Container(
               height: 160,
-              child: Swiper(
+              child:  Image.network(
+                _image[0],
+                fit: BoxFit.fill,
+              )/*
+              ///不支持空安全注释 演示部分需要更换sdk
+              Swiper(
                 itemCount: _image.length,
                 autoplay: true,
                 itemBuilder: (BuildContext context, int index) {
@@ -94,7 +106,7 @@ class _AppBarAlpha extends State<AppBarAlpha> {
                   );
                 },
                 pagination: SwiperPagination(),
-              ),
+              )*/,
             ),
             Column(
               children: <Widget>[
@@ -146,7 +158,7 @@ class _AppBarAlpha extends State<AppBarAlpha> {
                               return new Text("${snapshot.error}");
                             } else {
                               return new Text(
-                                  'FutureBuilder:${snapshot.data.title}-\n${snapshot.data.url}');
+                                  'FutureBuilder:${snapshot.data!.title}-\n${snapshot.data!.url}');
                             }
                           }
                       }
@@ -180,11 +192,11 @@ class _AppBarAlpha extends State<AppBarAlpha> {
 }
 
 class CommonModel {
-  final String icon;
-  final String title;
-  final String url;
-  final String statusBarColor;
-  final bool hideAppBar;
+   String? icon;
+   String? title;
+   String? url;
+   String? statusBarColor;
+   bool? hideAppBar;
 
   CommonModel(
       {this.icon, this.title, this.url, this.statusBarColor, this.hideAppBar});

@@ -10,7 +10,7 @@ class _GetAppLifeState extends State<GetAppLife> with WidgetsBindingObserver {
   @override
   void initState() {
     // TODO: implement initState
-    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance!.addObserver(this);
     print("initState");
     super.initState();
   }
@@ -52,7 +52,7 @@ class _GetAppLifeState extends State<GetAppLife> with WidgetsBindingObserver {
   @override
   void dispose() {
     // TODO: implement dispose
-    WidgetsBinding.instance.removeObserver(this);
+    WidgetsBinding.instance!.removeObserver(this);
     super.dispose();
   }
 }

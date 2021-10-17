@@ -10,10 +10,10 @@ class transitionLogo extends StatefulWidget {
 
 class _transitionLogoState extends State<transitionLogo>
     with SingleTickerProviderStateMixin {
-  Animation<double> animation;
-  AnimationController controller;
-  AnimationStatus animationStatus;
-  double animationValue;
+  Animation<double>? animation;
+  AnimationController? controller;
+  AnimationStatus? animationStatus;
+  double? animationValue;
 
   @override
   void initState() {
@@ -22,10 +22,10 @@ class _transitionLogoState extends State<transitionLogo>
     //vsync 页面不可见动画资源的回收
     controller =
         AnimationController(vsync: this, duration: Duration(seconds: 2));
-    animation = Tween<double>(begin: 0, end: 300).animate(controller)
+    animation = Tween<double>(begin: 0, end: 300).animate(controller!)
       ..addListener(() {
         setState(() {
-          animationValue = animation.value;
+          animationValue = animation!.value;
         });
       })
       ..addStatusListener((status) {
@@ -51,8 +51,8 @@ class _transitionLogoState extends State<transitionLogo>
             GestureDetector(
               onTap: () {
                 //重置 播放
-                controller.reset();
-                controller.forward();
+                controller!.reset();
+                controller!.forward();
               },
               child: Text(
                 "start animation",
@@ -68,8 +68,8 @@ class _transitionLogoState extends State<transitionLogo>
               textDirection: TextDirection.ltr,
             ),
             Container(
-              width: animation.value,
-              height: animation.value,
+              width: animation!.value,
+              height: animation!.value,
               child: FlutterLogo(),
             )
           ],
@@ -81,7 +81,7 @@ class _transitionLogoState extends State<transitionLogo>
   @override
   void dispose() {
     // TODO: implement dispose
-    controller.dispose();
+    controller!.dispose();
     super.dispose();
   }
 }

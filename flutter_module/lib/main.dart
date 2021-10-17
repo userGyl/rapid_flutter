@@ -10,7 +10,6 @@ import 'package:flutter_module/animation/transitionLogo2.dart';
 import 'package:flutter_module/screens/imagePicker.dart';
 import 'package:flutter_module/screens/urlLaunch.dart';
 import 'package:flutter_module/screens/widgetLife.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 
 import 'screens/GetAppLifecycle.dart';
 import 'animation/hero2.dart';
@@ -158,8 +157,8 @@ class _RouteNavigatorState extends State<RouteNavigator> {
     );
   }
 
-  //使用swiper banner
-  ConstrainedBox _buildConstrainedBox(BuildContext context) {
+  //使用swiper banner 空安全注释
+  /*ConstrainedBox _buildConstrainedBox(BuildContext context) {
     return new ConstrainedBox(
         child: new Swiper(
           outer: false,
@@ -192,6 +191,35 @@ class _RouteNavigatorState extends State<RouteNavigator> {
           },
           pagination: new SwiperPagination(margin: new EdgeInsets.all(5.0)),
           itemCount: 5,
+        ),
+        constraints: new BoxConstraints.loose(new Size(170.0, 100)));
+  }*/
+  ConstrainedBox _buildConstrainedBox(BuildContext context) {
+    return new ConstrainedBox(
+        child: new Wrap(
+          runSpacing: 6.0,
+          children: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) {
+            return new SizedBox(
+              width: MediaQuery.of(context).size.width / 5,
+              child: new Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  new SizedBox(
+                    child: new Container(
+                      child: new Image.network(
+                          "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3363295869,2467511306&fm=26&gp=0.jpg"),
+                    ),
+                    height: MediaQuery.of(context).size.width * 0.12,
+                    width: MediaQuery.of(context).size.width * 0.12,
+                  ),
+                  new Padding(
+                    padding: new EdgeInsets.only(top: 6.0),
+                    child: new Text("$i"),
+                  )
+                ],
+              ),
+            );
+          }).toList(),
         ),
         constraints: new BoxConstraints.loose(new Size(170.0, 100)));
   }

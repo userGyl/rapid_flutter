@@ -13,7 +13,7 @@ class ImagePickerWidget extends StatefulWidget {
  * tips:clip Stack GestureDetector
  */
 class _ImagePickerWidgetState extends State<ImagePickerWidget> {
-  List<File> _image = [];
+  List<XFile> _image = [];
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
           ClipRRect(
             borderRadius: BorderRadius.circular(5),
             child: Image.file(
-              file,
+              File(file.path),
               width: 120,
               height: 80,
               fit: BoxFit.fill,
@@ -83,11 +83,13 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
 
   Future getImage(bool isTakePhoto) async {
     Navigator.pop(context);
-    var image = await ImagePicker.pickImage(
+
+    final ImagePicker _picker = ImagePicker();
+    var image = await _picker.pickImage(
         source: isTakePhoto ? ImageSource.camera : ImageSource.gallery);
 
     setState(() {
-      _image.add(image);
+      _image.add(image!);
     });
   }
 

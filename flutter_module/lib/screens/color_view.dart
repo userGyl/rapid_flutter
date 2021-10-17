@@ -10,7 +10,7 @@ class ColorView extends StatefulWidget {
 
 class _ColorViewState extends State<ColorView> {
   /// 平台通道,消息使用平台通道在客户端（UI）和宿主（平台）之间传递
-  MethodChannel _channel;
+  late MethodChannel _channel;
 
   @override
   Widget build(BuildContext context) {

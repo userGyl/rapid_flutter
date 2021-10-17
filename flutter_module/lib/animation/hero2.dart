@@ -54,15 +54,10 @@ class _radiaExpansionDemo extends StatelessWidget {
     );
   }
 
-  /*
-   * 圆弧移动的tween
-   */
-  static RectTween _createRactTween(Rect begin, Rect end) {
-    return MaterialRectArcTween(begin: begin, end: end);
-  }
+
 
   //动画跳转页面
-  static Widget _buildPage(BuildContext context, String imageName, String des) {
+   Widget _buildPage(BuildContext context, String imageName, String des) {
     return Container(
       color: Colors.white,
       child: Center(
@@ -76,7 +71,6 @@ class _radiaExpansionDemo extends StatelessWidget {
                 width: kMaxRadius * 2.0,
                 height: kMaxRadius * 2.0,
                 child: Hero(
-                  createRectTween: _createRactTween,
                   tag: imageName,
                   child: _radiaExpansion(
                     maxRadius: kMaxRadius,
@@ -110,7 +104,6 @@ class _radiaExpansionDemo extends StatelessWidget {
       width: kMinRadius * 2.0,
       height: kMinRadius * 2.0,
       child: Hero(
-        createRectTween: _createRactTween,
         tag: imageName,
         child: _radiaExpansion(
           maxRadius: kMaxRadius,
@@ -122,7 +115,7 @@ class _radiaExpansionDemo extends StatelessWidget {
                       Animation<double> secondaryAnimation) {
                 return AnimatedBuilder(
                     animation: animation,
-                    builder: (BuildContext context, Widget child) {
+                    builder: (BuildContext context, Widget? child) {
                       //可更改子组件透明度
                       return Opacity(
                         opacity: opactyCurve.transform(animation.value),
@@ -139,11 +132,11 @@ class _radiaExpansionDemo extends StatelessWidget {
 }
 
 class _photo extends StatelessWidget {
-  final String photo;
-  final Color color;
-  final VoidCallback onTap;
+   String? photo="";
+   Color? color;
+   VoidCallback? onTap;
 
-  const _photo({Key key, this.photo, this.color, this.onTap}) : super(key: key);
+   _photo({Key? key,required this.photo, this.color, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +151,7 @@ class _photo extends StatelessWidget {
         child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints size) {
             return Image.network(
-              photo,
+              photo!,
               //尽量大
               fit: BoxFit.contain,
             );
@@ -171,12 +164,12 @@ class _photo extends StatelessWidget {
 
 //扩张样式
 class _radiaExpansion extends StatelessWidget {
-  final double maxRadius;
+  final double? maxRadius;
   final clipRectSize;
-  final Widget child;
+  final Widget? child;
 
-  const _radiaExpansion(
-      {Key key, this.maxRadius, this.clipRectSize, this.child})
+   _radiaExpansion(
+      {Key? key, this.maxRadius, this.clipRectSize, this.child})
       : super(key: key);
 
   @override

@@ -14,7 +14,7 @@ const CITY_NAMES = {
 };
 
 class ListWidget extends StatelessWidget {
-  const ListWidget({Key key}) : super(key: key);
+  const ListWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +92,7 @@ class ListWidget extends StatelessWidget {
         onExpansionChanged: (value) {
           print("ExpansionTitle展开状态$value");
         },
-        children: CITY_NAMES[element]
+        children: CITY_NAMES[element]!
             .map((cityList) => _buildExpansionTitleItem(element))
             .toList(),
       ));

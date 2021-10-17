@@ -23,7 +23,7 @@ class GrowTransition extends StatelessWidget {
   final Widget child;
   final Animation<double> animation;
 
-  GrowTransition({Key key, this.animation, this.child});
+  GrowTransition({Key? key, required this.animation, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +43,8 @@ class GrowTransition extends StatelessWidget {
 
 class _transitionLogo3State extends State<transitionLogo3>
     with SingleTickerProviderStateMixin {
-  AnimationController controller;
-  Animation<double> animation;
+  late AnimationController controller;
+  late Animation<double> animation;
 
   @override
   void initState() {
